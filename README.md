@@ -1,6 +1,18 @@
+The original docs for this was a bit tacky. Consensus in  a blockchain is important, and the Fabric devs didn't go that into details about the fact in the guthub Readme... about the fact that you need to configure a plugin to get rolling with distributed consensus in Fabirc. Huh? (This README will be made much more professionally once this repo solves some problems :)) This project is the fix Hyperledger fabric glaring consensus problem. And also... you shouldn't be able to turn off a blockchain when it's distributed. Gonna work on that one, too.
+Note: Hyper dev mode. Maybe that's what Hyperledger in general should be called right now. There is still hope. Okay...
+If this code doesn't work correctly, as is, then here is something you should know. Try that, then check out the rest of the docs below. Message me as mike@thinkathon.io if you have issues. I get back pretty quickly.
 
+Using a Consensus Plugin
+
+A consensus plugin might require some specific configuration that you need to set up. For example, to use the Practical Byzantine Fault Tolerant (PBFT) consensus plugin provided as part of the fabric, perform the following configuration:
+
+In core.yaml, set the peer.validator.consensus value to pbft
+In core.yaml, make sure the peer.id is set sequentially as vpN where N is an integer that starts from 0 and goes to N-1. For example, with 4 validating peers, set the peer.id tovp0, vp1, vp2, vp3.
+In consensus/pbft/config.yaml, set the general.mode value to batch and the general.N value to the number of validating peers on the network, also set general.batchsize to the number of transactions per batch.
+In consensus/pbft/config.yaml, optionally set timer values for the batch period (general.timeout.batch), the acceptable delay between request and execution (general.timeout.request), and for view-change (general.timeout.viewchange)
 **Note:** This is a **read-only mirror** of the formal [Gerrit](https://gerrit.hyperledger.org/r/#/admin/projects/fabric) repository,
 where active development is ongoing. Issue tracking is handled in [Jira](https://jira.hyperledger.org/secure/RapidBoard.jspa?projectKey=FAB&rapidView=5&view=planning)
+
 
 ## Incubation Notice
 
